@@ -1,8 +1,7 @@
-FROM maven:3.8.5-openjdk-17 AS build
-COPY . .
-RUN mvn clean package -DskipTests
+FROM openjdk:21.0.1
 
-FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/crud-app-backened-0.0.1-SNAPSHOT.jar crud-app-backened.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","crud-app-backened.jar"]
+COPY target/crud_docker_app.jar /usr/app/
+
+WORKDIR /usr/app
+
+ENTRYPOINT ["java","-jar","crud_docker_app.jar"]
