@@ -10,4 +10,6 @@ public interface StudentRepository extends JpaRepository<Student, Long>{
 
 	Student findByEmail(String email);
 
+	Student findByFileName(String fileName);
+
 }

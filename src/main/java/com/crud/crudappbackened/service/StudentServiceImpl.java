@@ -44,13 +44,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
 	@Override
-	public Student updateStudent(Student student, Long id) {
-		Student updatedStudent = studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(id+"not found"));
-		    updatedStudent.setFirstName(student.getFirstName());
-		    updatedStudent.setLastName(student.getLastName());
-		    updatedStudent.setDept(student.getDept());
-		    updatedStudent.setEmail(student.getEmail());
-		    updatedStudent.setAge(student.getAge());
+	public Student updateStudent(Student updatedStudent, Long id) {
+		
 		    return studentRepository.save(updatedStudent);
 		    
 //		    Optional<Student> optionalStudent = studentRepository.findById(id);
@@ -88,4 +83,10 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> getStudentsSortBasedOnField(String field) {
 		return studentRepository.findAll(Sort.by(Direction.ASC, field));
 	}
+
+	public byte[] getStudentByFileName(String fileName) {
+		return studentRepository.findByFileName(fileName).getImageData();
+	}
+	
+	
 }
